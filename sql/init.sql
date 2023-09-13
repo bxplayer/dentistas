@@ -43,5 +43,5 @@ VALUES
 INSERT INTO turno (descripcion, fecha_hora, paciente_id, dentista_id)
 VALUES
 ('Control de rutina', '2023-10-01 10:00:00', 1, 1),
-('Extracción muela', '2023-10-02 11:00:00', 2, 2),
+('Extraccion muela', '2023-10-02 11:00:00', 2, 2),
 ('Limpieza dental', '2023-10-03 12:00:00', 3, 3);
