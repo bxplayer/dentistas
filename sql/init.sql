@@ -23,8 +23,8 @@ CREATE TABLE IF NOT EXISTS  turno (
   paciente_id INT NOT NULL,
   dentista_id INT NOT NULL,
   PRIMARY KEY (id),
-  FOREIGN KEY (paciente_id) REFERENCES Paciente(id),
-  FOREIGN KEY (dentista_id) REFERENCES Dentista(id)
+  FOREIGN KEY (paciente_id) REFERENCES paciente(id),
+  FOREIGN KEY (dentista_id) REFERENCES dentista(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
