@@ -1,7 +1,7 @@
 package handler
 
 import (
-	"dentistas/internal/domain/dentista"
+	"dentistas/internal/dentista"
 	"net/http"
 	"strconv"
 
@@ -21,20 +21,19 @@ type DentistDelete interface {
 	Delete(id int) error
 }
 
-type DentistHandler struct{
-	dentistGetter DentistGetter
+type DentistHandler struct {
+	dentistGetter  DentistGetter
 	dentistCreator DentistCreator
-	dentistDelete DentistDelete
+	dentistDelete  DentistDelete
 }
 
-func newDentistHandler(getter DentistGetter, creator DentistCreator, delete DentistDelete) *DentistHandler {
+func NewDentistHandler(getter DentistGetter, creator DentistCreator, delete DentistDelete) *DentistHandler {
 	return &DentistHandler{
 		dentistGetter:  getter,
 		dentistCreator: creator,
-		dentistDelete : delete,
+		dentistDelete:  delete,
 	}
 }
-
 
 func (d *DentistHandler) GetDentistByID(ctx *gin.Context) {
 	idParam := ctx.Param("id")
@@ -45,13 +44,13 @@ func (d *DentistHandler) GetDentistByID(ctx *gin.Context) {
 	}
 	dentist, err := d.dentistGetter.GetByID(id)
 	if err != nil {
-		ctx.JSON(http.StatusNotFound, gin.H{"error": "product not found"})
+		ctx.JSON(http.StatusNotFound, gin.H{"error": "dentist not found"})
 		return
 	}
 	ctx.JSON(http.StatusOK, dentist)
 }
 
-func (d *DentistHandler) PutProduct(ctx *gin.Context) {
+func (d *DentistHandler) PutDentist(ctx *gin.Context) {
 	idParam := ctx.Param("id")
 	id, err := strconv.Atoi(idParam)
 	if err != nil {
