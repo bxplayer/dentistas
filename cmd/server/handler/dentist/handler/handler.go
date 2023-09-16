@@ -1,37 +1,30 @@
 package handler
 
 import (
-	"dentistas/internal/dentista"
 	"net/http"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
 
-type DentistGetter interface {
-	GetByID(id int) (dentista.Dentista, error)
-}
-
-type DentistCreator interface {
-	Update(id int, dentista dentista.Dentista) (dentista.Dentista, error)
-	Add(dentista dentista.Dentista) (dentista.Dentista, error)
-}
-
-type DentistDelete interface {
-	Delete(id int) error
-}
-
 type DentistHandler struct {
-	dentistGetter  DentistGetter
+	dentistGetter  DentistGetters
 	dentistCreator DentistCreator
 	dentistDelete  DentistDelete
+	dentistUpdate  DentistUpdates
 }
 
-func NewDentistHandler(getter DentistGetter, creator DentistCreator, delete DentistDelete) *DentistHandler {
+func NewDentistHandler(
+	getter DentistGetters,
+	creator DentistCreator,
+	delete DentistDelete,
+	update DentistUpdates,
+) *DentistHandler {
 	return &DentistHandler{
 		dentistGetter:  getter,
 		dentistCreator: creator,
 		dentistDelete:  delete,
+		dentistUpdate:  update,
 	}
 }
 
@@ -50,14 +43,14 @@ func (d *DentistHandler) GetDentistByID(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, dentist)
 }
 
-func (d *DentistHandler) PutDentist(ctx *gin.Context) {
+/*func (d *Handler) PutDentist(ctx *gin.Context) {
 	idParam := ctx.Param("id")
 	id, err := strconv.Atoi(idParam)
 	if err != nil {
 		ctx.JSON(400, gin.H{"error": "invalid id"})
 		return
 	}
-	dentistRequest := dentista.Dentista{}
+	dentistRequest := dentist.Dentist{}
 	err = ctx.BindJSON(&dentistRequest)
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -69,4 +62,4 @@ func (d *DentistHandler) PutDentist(ctx *gin.Context) {
 		return
 	}
 	ctx.JSON(200, dentist)
-}
+}*/
