@@ -19,7 +19,7 @@ func (s *SqlStore) GetByID(id int) (dentist.Dentist, error) {
 
 	var d dentist.Dentist
 
-	query := fmt.Sprintf("SELECT * FROM dentist WHERE id = %d;", id)
+	query := fmt.Sprintf("SELECT * FROM dentista WHERE id = %d;", id)
 	row := s.DB.QueryRow(query)
 	err := row.Scan(&d.ID, &d.Apellido, &d.Nombre, &d.Matricula)
 

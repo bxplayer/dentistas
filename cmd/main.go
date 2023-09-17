@@ -2,8 +2,11 @@ package main
 
 import (
 	"dentistas/cmd/server/external/database"
+	"dentistas/cmd/server/external/database/turnoRepository"
 	"dentistas/cmd/server/handler/dentist/handler"
+	"dentistas/cmd/server/handler/turnoHandler"
 	"dentistas/internal/dentist"
+	"dentistas/internal/turno"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 	"log"
@@ -30,6 +33,7 @@ func main() {
 		panic(err)
 	}
 
+	// Configuracion de DentistaId
 	myDatabase := database.NewDatabase(mysqlDatabase)
 
 	dentistService := dentist.NewService(myDatabase)
@@ -39,6 +43,14 @@ func main() {
 	dentistGroup := router.Group("/dentist")
 
 	dentistGroup.GET("/:id", dentistHandlerPo.GetDentistByID)
+
+	// Configuracion de Turno
+	turnoDatabase := turnoRepository.NewDatabase(mysqlDatabase)
+	turnoService := turno.NewService(turnoDatabase)
+	turnoHandlerPro := turnoHandler.NewTurnoHandler(turnoService, turnoService, turnoService, turnoService)
+	turnoGroup := router.Group("/turno")
+	turnoGroup.GET("/:id", turnoHandlerPro.GetTurnoByID)
+	turnoGroup.POST("/", turnoHandlerPro.AddTurno)
 
 	err = router.Run()
 
