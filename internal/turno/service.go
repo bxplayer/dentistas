@@ -24,6 +24,10 @@ func (s *Service) DeleteByID(id int) error {
 	return s.repository.Delete(id)
 }
 
+func (s *Service) GetByPacienteDNI(dni string) ([]Turno, error) {
+	return s.repository.GetByPacienteDNI(dni)
+}
+
 //func (s *Service) SomeUpdate(id int, turnoRepository Turno) (Turno, error) {
 //	return s.repository.SomeUpdate(id, turnoRepository)
 //}

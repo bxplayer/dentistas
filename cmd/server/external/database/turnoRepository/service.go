@@ -101,3 +101,21 @@ func (s *SqlStore) Delete(id int) error {
 
 	return nil
 }
+
+func (s *SqlStore) GetByPacienteDNI(dni string) ([]turno.Turno, error) {
+	var turnos []turno.Turno
+	query := fmt.Sprintf("SELECT * FROM turno WHERE paciente_id =  '%v';", dni)
+	rows, err := s.DB.Query(query)
+	if err != nil {
+		return []turno.Turno{}, err
+	}
+	for rows.Next() {
+		var t turno.Turno
+		err := rows.Scan(&t.ID, &t.Descripcion, &t.FechaHora, &t.PacienteId, &t.DentistaId)
+		if err != nil {
+			return []turno.Turno{}, err
+		}
+		turnos = append(turnos, t)
+	}
+	return turnos, nil
+}

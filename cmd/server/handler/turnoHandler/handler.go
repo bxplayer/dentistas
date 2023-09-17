@@ -92,3 +92,13 @@ func (t *TurnoHandler) DeleteByID(ctx *gin.Context) {
 	}
 	ctx.JSON(http.StatusOK, gin.H{"message": "turno deleted"})
 }
+
+func (t *TurnoHandler) GetByPacienteDNI(ctx *gin.Context) {
+	dni := ctx.Param("dni")
+	turnos, err := t.turnoGetter.GetByPacienteDNI(dni)
+	if err != nil {
+		ctx.JSON(http.StatusNotFound, gin.H{"error": "turno not found"})
+		return
+	}
+	ctx.JSON(http.StatusOK, turnos)
+}

@@ -4,6 +4,7 @@ import "dentistas/internal/turno"
 
 type TurnoGetter interface {
 	GetById(id int) (turno.Turno, error)
+	GetByPacienteDNI(dni string) ([]turno.Turno, error)
 }
 
 type TurnoUpdater interface {
