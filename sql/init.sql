@@ -20,11 +20,9 @@ CREATE TABLE IF NOT EXISTS  turno (
   id INT NOT NULL AUTO_INCREMENT,
   descripcion TEXT,
   fecha_hora DATETIME NOT NULL,
-  paciente_id INT NOT NULL,
+  paciente_dni INT NOT NULL,
   dentista_id INT NOT NULL,
-  PRIMARY KEY (id),
-  FOREIGN KEY (paciente_id) REFERENCES paciente(id),
-  FOREIGN KEY (dentista_id) REFERENCES dentista(id)
+  PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
@@ -40,7 +38,7 @@ VALUES
 ('Pedro', 'Lopez', 'Avenida Siempreviva 456', '23456789', '2023-02-01'),
 ('Laura', 'Garcia', 'Boulevard de los Sueños Rotos 789', '34567890', '2023-03-01');
 
-INSERT INTO turno (descripcion, fecha_hora, paciente_id, dentista_id)
+INSERT INTO turno (descripcion, fecha_hora, paciente_dni, dentista_id)
 VALUES
 ('Control de rutina', '2023-10-01 10:00:00', 1, 1),
 ('Extraccion muela', '2023-10-02 11:00:00', 2, 2),
