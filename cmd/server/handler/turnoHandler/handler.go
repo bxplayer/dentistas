@@ -77,3 +77,18 @@ func (t *TurnoHandler) Update(ctx *gin.Context) {
 	}
 	ctx.JSON(http.StatusOK, turno)
 }
+
+func (t *TurnoHandler) DeleteByID(ctx *gin.Context) {
+	idParam := ctx.Param("id")
+	id, err := strconv.Atoi(idParam)
+	if err != nil {
+		ctx.JSON(400, gin.H{"error": "invalid id"})
+		return
+	}
+	err = t.turnoDeleter.DeleteByID(id)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+	ctx.JSON(http.StatusOK, gin.H{"message": "turno deleted"})
+}

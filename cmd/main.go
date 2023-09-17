@@ -52,6 +52,7 @@ func main() {
 	turnoGroup.GET("/:id", turnoHandlerPro.GetTurnoByID)
 	turnoGroup.POST("/", turnoHandlerPro.AddTurno)
 	turnoGroup.PUT("/:id", turnoHandlerPro.Update)
+	turnoGroup.DELETE("/:id", turnoHandlerPro.DeleteByID)
 
 	err = router.Run()
 
