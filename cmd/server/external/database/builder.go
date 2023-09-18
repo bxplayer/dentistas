@@ -15,7 +15,6 @@ func NewMysqlDatabase(host, port, user, password, dbname string) (*sql.DB, error
 		return nil, err
 	}
 
-	// Probamos la conexión para asegurarnos de que sea válida.
 	err = db.Ping()
 	if err != nil {
 		return nil, err

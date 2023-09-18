@@ -7,11 +7,12 @@ type DentistGetters interface {
 }
 
 type DentistCreator interface {
-	Add(dentista dentist.Dentist) (dentist.Dentist, error)
+	Create(dentist dentist.Dentist) (dentist.Dentist, error)
 }
 
 type DentistUpdates interface {
-	Update(id int, dentista dentist.Dentist) (dentist.Dentist, error)
+	Update(id int, dentist dentist.Dentist) (dentist.Dentist, error)
+	Patch(id int, dentist dentist.DentistPatch) (dentist.Dentist, error)
 }
 
 type DentistDelete interface {

@@ -3,6 +3,7 @@ package main
 import (
 	"dentistas/cmd/server/external/database"
 	"dentistas/cmd/server/handler/dentist/handler"
+	dentistRoutes "dentistas/cmd/server/routes/dentist"
 	"dentistas/internal/dentist"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
@@ -36,9 +37,7 @@ func main() {
 
 	dentistHandlerPo := handler.NewDentistHandler(dentistService, dentistService, dentistService, dentistService)
 
-	dentistGroup := router.Group("/dentist")
-
-	dentistGroup.GET("/:id", dentistHandlerPo.GetDentistByID)
+	dentistRoutes.SetupDentistRouter(router, dentistHandlerPo)
 
 	err = router.Run()
 
