@@ -9,7 +9,7 @@ type TurnoGetter interface {
 
 type TurnoUpdater interface {
 	Update(id int, turno turno.Turno) (turno.Turno, error)
-	//SomeUpdate(id int, turnoRepository turnoRepository.Turno) (turnoRepository.Turno, error)
+	SomeUpdate(id int, turnoRepository turno.Turno) (turno.Turno, error)
 }
 
 type TurnoCreator interface {

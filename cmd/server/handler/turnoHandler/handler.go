@@ -102,3 +102,24 @@ func (t *TurnoHandler) GetByPacienteDNI(ctx *gin.Context) {
 	}
 	ctx.JSON(http.StatusOK, turnos)
 }
+
+func (t *TurnoHandler) SomeUpdate(ctx *gin.Context) {
+	idParam := ctx.Param("id")
+	id, err := strconv.Atoi(idParam)
+	if err != nil {
+		ctx.JSON(400, gin.H{"error": "invalid id"})
+		return
+	}
+	turnoRequest := turno2.Turno{}
+	err = ctx.BindJSON(&turnoRequest)
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	turno, err := t.turnoUpdater.SomeUpdate(id, turnoRequest)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+	ctx.JSON(http.StatusOK, turno)
+}

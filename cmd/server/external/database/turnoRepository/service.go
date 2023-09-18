@@ -119,3 +119,43 @@ func (s *SqlStore) GetByPacienteDNI(dni string) ([]turno.Turno, error) {
 	}
 	return turnos, nil
 }
+
+func (s *SqlStore) SomeUpdate(id int, turnoParam turno.Turno) (turno.Turno, error) {
+	// Verificar si el turno existe.
+	savedTurno, err1 := s.GetByID(id)
+	if err1 != nil {
+		// Si hay un error, eso significa que el turno no existe.
+		return turno.Turno{}, err1
+	}
+
+	if turnoParam.Descripcion != "" {
+		savedTurno.Descripcion = turnoParam.Descripcion
+	}
+	if turnoParam.FechaHora != "" {
+		var date, err = time.Parse("2006-01-02 15:04:05", turnoParam.FechaHora)
+		if err != nil {
+			return turno.Turno{}, err
+		}
+		dateUTC := date.UTC().Format("2006-01-02 15:04:05")
+		savedTurno.FechaHora = dateUTC
+	}
+	if turnoParam.PacienteId != "" {
+		savedTurno.PacienteId = turnoParam.PacienteId
+	}
+	if turnoParam.DentistaId != "" {
+		savedTurno.DentistaId = turnoParam.DentistaId
+	}
+
+	query := fmt.Sprintf("UPDATE turno SET descripcion = '%v', fecha_hora = '%v', paciente_dni = %v, dentista_id = %v WHERE id = %v;", savedTurno.Descripcion, savedTurno.FechaHora, savedTurno.PacienteId, savedTurno.DentistaId, id)
+	stmt, err := s.DB.Prepare(query)
+	if err != nil {
+		return turno.Turno{}, err
+	}
+
+	_, err = stmt.Exec()
+	if err != nil {
+		return turno.Turno{}, err
+	}
+
+	return savedTurno, nil
+}
