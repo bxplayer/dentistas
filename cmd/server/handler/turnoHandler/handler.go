@@ -28,7 +28,7 @@ func NewTurnoHandler(
 	}
 }
 
-// GetByID godoc
+// GetTurnoByID godoc
 // @Summary Get turno by ID
 // @Description Get turno by ID
 // @Tags turnos
