@@ -128,12 +128,12 @@ func (t *TurnoHandler) DeleteByID(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, gin.H{"message": "turno deleted"})
 }
 
-// GetByDentistaID godoc
-// @Summary Get turnos by Dentista ID
-// @Description Get turnos by Dentista ID
+// GetByPacienteDNI GetByDentistaID godoc
+// @Summary Get turnos by Paciente ID
+// @Description Get turnos by Paciente ID
 // @Tags turnos
 // @Produce json
-// @Param dni query string true "ID"
+// @Param dni query string true "DNI"
 // @Success 200 {object} []turno.Turno
 // @Router /turno [get]
 func (t *TurnoHandler) GetByPacienteDNI(ctx *gin.Context) {

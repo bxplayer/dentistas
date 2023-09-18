@@ -21,18 +21,18 @@ const docTemplate = `{
     "paths": {
         "/turno": {
             "get": {
-                "description": "Get turnos by Dentista ID",
+                "description": "Get turnos by Paciente ID",
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
                     "turnos"
                 ],
-                "summary": "Get turnos by Dentista ID",
+                "summary": "Get turnos by Paciente ID",
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "ID",
+                        "description": "DNI",
                         "name": "dni",
                         "in": "query",
                         "required": true

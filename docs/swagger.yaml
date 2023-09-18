@@ -23,9 +23,9 @@ info:
 paths:
   /turno:
     get:
-      description: Get turnos by Dentista ID
+      description: Get turnos by Paciente ID
       parameters:
-      - description: ID
+      - description: DNI
         in: query
         name: dni
         required: true
@@ -39,7 +39,7 @@ paths:
             items:
               $ref: '#/definitions/turno.Turno'
             type: array
-      summary: Get turnos by Dentista ID
+      summary: Get turnos by Paciente ID
       tags:
       - turnos
     post:
