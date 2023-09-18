@@ -6,8 +6,8 @@ services:
     container_name: mysql-dentistas
     environment:
       MYSQL_DATABASE: 'db'
-      MYSQL_USER: 'user'      
-      MYSQL_PASSWORD: 'password'      
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'password'
       MYSQL_ROOT_PASSWORD: 'password'
     ports:
       - "3307:3306"

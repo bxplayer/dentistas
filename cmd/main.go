@@ -5,6 +5,7 @@ import (
 	"dentistas/cmd/server/external/database/turnoRepository"
 	"dentistas/cmd/server/handler/dentist/handler"
 	"dentistas/cmd/server/handler/turnoHandler"
+	dentistRoutes "dentistas/cmd/server/routes/dentist"
 	"dentistas/docs"
 	"dentistas/internal/dentist"
 	"dentistas/internal/turno"
@@ -53,9 +54,7 @@ func main() {
 
 	dentistHandlerPo := handler.NewDentistHandler(dentistService, dentistService, dentistService, dentistService)
 
-	dentistGroup := router.Group("/dentist")
-
-	dentistGroup.GET("/:id", dentistHandlerPo.GetDentistByID)
+	dentistRoutes.SetupDentistRouter(router, dentistHandlerPo)
 
 	// Configuracion de Turno
 	turnoDatabase := turnoRepository.NewDatabase(mysqlDatabase)

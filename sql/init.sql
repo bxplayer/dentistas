@@ -27,16 +27,14 @@ CREATE TABLE IF NOT EXISTS  turno (
 
 
 INSERT INTO dentista (apellido, nombre, matricula)
-VALUES
-('Gonzalez', 'Juan', 'A123'),
-('Perez', 'Ana', 'B456'),
-('Rodriguez', 'Carlos', 'C789');
+VALUES ('Gonzalez', 'Juan', 'A123'),
+       ('Perez', 'Ana', 'B456'),
+       ('Rodriguez', 'Carlos', 'C789');
 
 INSERT INTO paciente (nombre, apellido, domicilio, DNI, fecha_alta)
-VALUES
-('Maria', 'Fernandez', 'Calle Falsa 123', '12345678', '2023-01-01'),
-('Pedro', 'Lopez', 'Avenida Siempreviva 456', '23456789', '2023-02-01'),
-('Laura', 'Garcia', 'Boulevard de los Sueños Rotos 789', '34567890', '2023-03-01');
+VALUES ('Maria', 'Fernandez', 'Calle Falsa 123', '12345678', '2023-01-01'),
+       ('Pedro', 'Lopez', 'Avenida Siempreviva 456', '23456789', '2023-02-01'),
+       ('Laura', 'Garcia', 'Boulevard de los Sueños Rotos 789', '34567890', '2023-03-01');
 
 INSERT INTO turno (descripcion, fecha_hora, paciente_dni, dentista_id)
 VALUES
