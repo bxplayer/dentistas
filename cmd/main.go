@@ -5,6 +5,8 @@ import (
 	"dentistas/cmd/server/handler/dentist/handler"
 	dentistRoutes "dentistas/cmd/server/routes/dentist"
 	"dentistas/internal/dentist"
+	patientRoutes "dentistas/cmd/server/routes/patient"
+	"dentistas/internal/patient"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 	"log"
@@ -38,6 +40,14 @@ func main() {
 	dentistHandlerPo := handler.NewDentistHandler(dentistService, dentistService, dentistService, dentistService)
 
 	dentistRoutes.SetupDentistRouter(router, dentistHandlerPo)
+
+	patientDatabase := NewDatabase(mysqlDatabase)
+
+	patientService := patient.NewService(patientDatabase)
+
+	patientHandlerPo := handler.NewPatientHandler(patientService, patientService, patientService, patientService)
+
+	patientRoutes.SetupPatientRouter(router, patientHandlerPo)
 
 	err = router.Run()
 
