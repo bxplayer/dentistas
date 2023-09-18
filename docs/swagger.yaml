@@ -1,0 +1,155 @@
+definitions:
+  turno.Turno:
+    properties:
+      dentistaId:
+        type: string
+      descripcion:
+        type: string
+      fechaHora:
+        type: string
+      id:
+        type: integer
+      pacienteDni:
+        type: string
+    type: object
+info:
+  contact: {}
+  description: This API Handle Products.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  title: Certified Tech Developer - Dentistas
+  version: "1.0"
+paths:
+  /turno:
+    get:
+      description: Get turnos by Paciente ID
+      parameters:
+      - description: DNI
+        in: query
+        name: dni
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/turno.Turno'
+            type: array
+      summary: Get turnos by Paciente ID
+      tags:
+      - turnos
+    post:
+      consumes:
+      - application/json
+      description: Add a turno
+      parameters:
+      - description: Turno
+        in: body
+        name: turno
+        required: true
+        schema:
+          $ref: '#/definitions/turno.Turno'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/turno.Turno'
+      summary: Add a turno
+      tags:
+      - turnos
+  /turno/{id}:
+    delete:
+      description: Delete a turno
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: turno deleted
+          schema:
+            type: string
+      summary: Delete a turno
+      tags:
+      - turnos
+    get:
+      description: Get turno by ID
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/turno.Turno'
+      summary: Get turno by ID
+      tags:
+      - turnos
+    patch:
+      consumes:
+      - application/json
+      description: Update a turno with a patch
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Turno
+        in: body
+        name: turno
+        required: true
+        schema:
+          $ref: '#/definitions/turno.Turno'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/turno.Turno'
+      summary: Update a turno with a patch
+      tags:
+      - turnos
+    put:
+      consumes:
+      - application/json
+      description: Update a turno
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Turno
+        in: body
+        name: turno
+        required: true
+        schema:
+          $ref: '#/definitions/turno.Turno'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/turno.Turno'
+      summary: Update a turno
+      tags:
+      - turnos
+swagger: "2.0"
