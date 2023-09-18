@@ -5,7 +5,7 @@ import (
 	"dentistas/cmd/server/external/database/turnoRepository"
 	"dentistas/cmd/server/handler/dentist/handler"
 	"dentistas/cmd/server/handler/turnoHandler"
-	dentistRoutes "dentistas/cmd/server/routes/dentist"
+	"dentistas/cmd/server/routes"
 	"dentistas/docs"
 	"dentistas/internal/dentist"
 	"dentistas/internal/turno"
@@ -54,19 +54,13 @@ func main() {
 
 	dentistHandlerPo := handler.NewDentistHandler(dentistService, dentistService, dentistService, dentistService)
 
-	dentistRoutes.SetupDentistRouter(router, dentistHandlerPo)
+	routes.SetupDentistRouter(router, dentistHandlerPo)
 
 	// Configuracion de Turno
 	turnoDatabase := turnoRepository.NewDatabase(mysqlDatabase)
 	turnoService := turno.NewService(turnoDatabase)
 	turnoHandlerPro := turnoHandler.NewTurnoHandler(turnoService, turnoService, turnoService, turnoService)
-	turnoGroup := router.Group("/turno")
-	turnoGroup.GET("/:id", turnoHandlerPro.GetTurnoByID)
-	turnoGroup.GET("/", turnoHandlerPro.GetByPacienteDNI)
-	turnoGroup.POST("/", turnoHandlerPro.AddTurno)
-	turnoGroup.PUT("/:id", turnoHandlerPro.Update)
-	turnoGroup.DELETE("/:id", turnoHandlerPro.DeleteByID)
-	turnoGroup.PATCH("/:id", turnoHandlerPro.SomeUpdate)
+	routes.SetupTurnRouter(router, turnoHandlerPro)
 
 	err = router.Run()
 	if err != nil {
