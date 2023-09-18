@@ -133,11 +133,11 @@ func (t *TurnoHandler) DeleteByID(ctx *gin.Context) {
 // @Description Get turnos by Dentista ID
 // @Tags turnos
 // @Produce json
-// @Param id path string true "ID"
+// @Param dni query string true "ID"
 // @Success 200 {object} []turno.Turno
-// @Router /turno/dni/{id} [get]
+// @Router /turno [get]
 func (t *TurnoHandler) GetByPacienteDNI(ctx *gin.Context) {
-	dni := ctx.Param("dni")
+	dni := ctx.Query("dni")
 	turnos, err := t.turnoGetter.GetByPacienteDNI(dni)
 	if err != nil {
 		ctx.JSON(http.StatusNotFound, gin.H{"error": "turno not found"})

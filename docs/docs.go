@@ -20,6 +20,36 @@ const docTemplate = `{
     "basePath": "{{.BasePath}}",
     "paths": {
         "/turno": {
+            "get": {
+                "description": "Get turnos by Dentista ID",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "turnos"
+                ],
+                "summary": "Get turnos by Dentista ID",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "ID",
+                        "name": "dni",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/turno.Turno"
+                            }
+                        }
+                    }
+                }
+            },
             "post": {
                 "description": "Add a turno",
                 "consumes": [
@@ -48,38 +78,6 @@ const docTemplate = `{
                         "description": "Created",
                         "schema": {
                             "$ref": "#/definitions/turno.Turno"
-                        }
-                    }
-                }
-            }
-        },
-        "/turno/dni/{id}": {
-            "get": {
-                "description": "Get turnos by Dentista ID",
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "turnos"
-                ],
-                "summary": "Get turnos by Dentista ID",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "ID",
-                        "name": "id",
-                        "in": "path",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/turno.Turno"
-                            }
                         }
                     }
                 }

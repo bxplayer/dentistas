@@ -63,7 +63,7 @@ func main() {
 	turnoHandlerPro := turnoHandler.NewTurnoHandler(turnoService, turnoService, turnoService, turnoService)
 	turnoGroup := router.Group("/turno")
 	turnoGroup.GET("/:id", turnoHandlerPro.GetTurnoByID)
-	turnoGroup.GET("/dni/:dni", turnoHandlerPro.GetByPacienteDNI)
+	turnoGroup.GET("/", turnoHandlerPro.GetByPacienteDNI)
 	turnoGroup.POST("/", turnoHandlerPro.AddTurno)
 	turnoGroup.PUT("/:id", turnoHandlerPro.Update)
 	turnoGroup.DELETE("/:id", turnoHandlerPro.DeleteByID)
