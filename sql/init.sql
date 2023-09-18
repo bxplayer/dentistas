@@ -20,8 +20,8 @@ CREATE TABLE IF NOT EXISTS  turno (
   id INT NOT NULL AUTO_INCREMENT,
   descripcion TEXT,
   fecha_hora DATETIME NOT NULL,
-  paciente_dni INT NOT NULL,
-  dentista_id INT NOT NULL,
+  paciente_dni VARCHAR(20) NOT NULL,
+  dentista_id VARCHAR(50) NOT NULL,
   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 

@@ -4,6 +4,6 @@ type Turno struct {
 	ID          int    `json:"id"`
 	Descripcion string `json:"descripcion"`
 	FechaHora   string `json:"fechaHora"`
-	PacienteId  string `json:"pacienteId"`
+	PacienteDni string `json:"pacienteDni"`
 	DentistaId  string `json:"dentistaId"`
 }

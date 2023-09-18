@@ -234,7 +234,7 @@ const docTemplate = `{
                 "id": {
                     "type": "integer"
                 },
-                "pacienteId": {
+                "pacienteDni": {
                     "type": "string"
                 }
             }

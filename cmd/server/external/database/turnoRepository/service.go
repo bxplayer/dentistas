@@ -22,7 +22,7 @@ func (s *SqlStore) GetByID(id int) (turno.Turno, error) {
 
 	query := fmt.Sprintf("SELECT * FROM turno WHERE id = %d;", id)
 	row := s.DB.QueryRow(query)
-	err := row.Scan(&t.ID, &t.Descripcion, &t.FechaHora, &t.PacienteId, &t.DentistaId)
+	err := row.Scan(&t.ID, &t.Descripcion, &t.FechaHora, &t.PacienteDni, &t.DentistaId)
 
 	if err != nil {
 		return turno.Turno{}, err
@@ -38,7 +38,7 @@ func (s *SqlStore) Create(turnoParam turno.Turno) (turno.Turno, error) {
 	}
 	dateUTC := date.UTC().Format("2006-01-02 15:04:05")
 
-	query := fmt.Sprintf("INSERT INTO turno (descripcion, fecha_hora, paciente_dni, dentista_id) VALUES ('%v', '%v', %v, %v);", turnoParam.Descripcion, dateUTC, turnoParam.PacienteId, turnoParam.DentistaId)
+	query := fmt.Sprintf("INSERT INTO turno (descripcion, fecha_hora, paciente_dni, dentista_id) VALUES ('%v', '%v', '%v', '%v');", turnoParam.Descripcion, dateUTC, turnoParam.PacienteDni, turnoParam.DentistaId)
 	stmt, err := s.DB.Prepare(query)
 	if err != nil {
 		return turno.Turno{}, err
@@ -67,7 +67,7 @@ func (s *SqlStore) Update(id int, turnoParam turno.Turno) (turno.Turno, error) {
 	}
 	dateUTC := date.UTC().Format("2006-01-02 15:04:05")
 
-	query := fmt.Sprintf("UPDATE turno SET descripcion = '%v', fecha_hora = '%v', paciente_dni = %v, dentista_id = %v WHERE id = %v;", turnoParam.Descripcion, dateUTC, turnoParam.PacienteId, turnoParam.DentistaId, id)
+	query := fmt.Sprintf("UPDATE turno SET descripcion = '%v', fecha_hora = '%v', paciente_dni = '%v', dentista_id = '%v' WHERE id = %v;", turnoParam.Descripcion, dateUTC, turnoParam.PacienteDni, turnoParam.DentistaId, id)
 	stmt, err := s.DB.Prepare(query)
 	if err != nil {
 		return turno.Turno{}, err
@@ -111,7 +111,7 @@ func (s *SqlStore) GetByPacienteDNI(dni string) ([]turno.Turno, error) {
 	}
 	for rows.Next() {
 		var t turno.Turno
-		err := rows.Scan(&t.ID, &t.Descripcion, &t.FechaHora, &t.PacienteId, &t.DentistaId)
+		err := rows.Scan(&t.ID, &t.Descripcion, &t.FechaHora, &t.PacienteDni, &t.DentistaId)
 		if err != nil {
 			return []turno.Turno{}, err
 		}
@@ -139,14 +139,14 @@ func (s *SqlStore) SomeUpdate(id int, turnoParam turno.Turno) (turno.Turno, erro
 		dateUTC := date.UTC().Format("2006-01-02 15:04:05")
 		savedTurno.FechaHora = dateUTC
 	}
-	if turnoParam.PacienteId != "" {
-		savedTurno.PacienteId = turnoParam.PacienteId
+	if turnoParam.PacienteDni != "" {
+		savedTurno.PacienteDni = turnoParam.PacienteDni
 	}
 	if turnoParam.DentistaId != "" {
 		savedTurno.DentistaId = turnoParam.DentistaId
 	}
 
-	query := fmt.Sprintf("UPDATE turno SET descripcion = '%v', fecha_hora = '%v', paciente_dni = %v, dentista_id = %v WHERE id = %v;", savedTurno.Descripcion, savedTurno.FechaHora, savedTurno.PacienteId, savedTurno.DentistaId, id)
+	query := fmt.Sprintf("UPDATE turno SET descripcion = '%v', fecha_hora = '%v', paciente_dni = '%v', dentista_id = '%v' WHERE id = %v;", savedTurno.Descripcion, savedTurno.FechaHora, savedTurno.PacienteDni, savedTurno.DentistaId, id)
 	stmt, err := s.DB.Prepare(query)
 	if err != nil {
 		return turno.Turno{}, err
