@@ -3,7 +3,7 @@ package main
 import (
 	"dentistas/cmd/server/external/database"
 	"dentistas/cmd/server/external/database/turnoRepository"
-	"dentistas/cmd/server/handler/dentist/handler"
+	dentist2 "dentistas/cmd/server/handler/dentist"
 	"dentistas/cmd/server/handler/turnoHandler"
 	"dentistas/cmd/server/routes"
 	"dentistas/docs"
@@ -52,7 +52,7 @@ func main() {
 
 	dentistService := dentist.NewService(myDatabase)
 
-	dentistHandlerPo := handler.NewDentistHandler(dentistService, dentistService, dentistService, dentistService)
+	dentistHandlerPo := dentist2.NewDentistHandler(dentistService, dentistService, dentistService, dentistService)
 
 	routes.SetupDentistRouter(router, dentistHandlerPo)
 
