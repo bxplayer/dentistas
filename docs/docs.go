@@ -19,6 +19,153 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/dentist": {
+            "post": {
+                "description": "Add a dentist",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "dentists"
+                ],
+                "summary": "Add a dentist",
+                "parameters": [
+                    {
+                        "description": "Dentist",
+                        "name": "dentist",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dentist.Dentist"
+                        }
+                    },
+                    {
+                        "type": "string",
+                        "description": "Token",
+                        "name": "TOKEN",
+                        "in": "header"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/dentist.Dentist"
+                        }
+                    }
+                }
+            }
+        },
+        "/dentist/{id}": {
+            "get": {
+                "description": "Get dentist by ID",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "dentists"
+                ],
+                "summary": "Get dentist by ID",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/dentist.Dentist"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "Update a dentist",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "dentists"
+                ],
+                "summary": "Update a dentist",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Dentist",
+                        "name": "turno",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dentist.Dentist"
+                        }
+                    },
+                    {
+                        "type": "string",
+                        "description": "Token",
+                        "name": "TOKEN",
+                        "in": "header"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/dentist.Dentist"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Delete a dentist",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "dentists"
+                ],
+                "summary": "Delete a dentist",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Token",
+                        "name": "TOKEN",
+                        "in": "header"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "dentist deleted",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/turno": {
             "get": {
                 "description": "Get turnos by Paciente ID",
@@ -71,6 +218,12 @@ const docTemplate = `{
                         "schema": {
                             "$ref": "#/definitions/turno.Turno"
                         }
+                    },
+                    {
+                        "type": "string",
+                        "description": "Token",
+                        "name": "TOKEN",
+                        "in": "header"
                     }
                 ],
                 "responses": {
@@ -139,6 +292,12 @@ const docTemplate = `{
                         "schema": {
                             "$ref": "#/definitions/turno.Turno"
                         }
+                    },
+                    {
+                        "type": "string",
+                        "description": "Token",
+                        "name": "TOKEN",
+                        "in": "header"
                     }
                 ],
                 "responses": {
@@ -166,6 +325,12 @@ const docTemplate = `{
                         "name": "id",
                         "in": "path",
                         "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Token",
+                        "name": "TOKEN",
+                        "in": "header"
                     }
                 ],
                 "responses": {
@@ -198,6 +363,12 @@ const docTemplate = `{
                         "required": true
                     },
                     {
+                        "type": "string",
+                        "description": "Token",
+                        "name": "TOKEN",
+                        "in": "header"
+                    },
+                    {
                         "description": "Turno",
                         "name": "turno",
                         "in": "body",
@@ -219,6 +390,28 @@ const docTemplate = `{
         }
     },
     "definitions": {
+        "dentist.Dentist": {
+            "type": "object",
+            "required": [
+                "apellido",
+                "matricula",
+                "nombre"
+            ],
+            "properties": {
+                "apellido": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "matricula": {
+                    "type": "string"
+                },
+                "nombre": {
+                    "type": "string"
+                }
+            }
+        },
         "turno.Turno": {
             "type": "object",
             "properties": {

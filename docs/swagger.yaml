@@ -1,4 +1,19 @@
 definitions:
+  dentist.Dentist:
+    properties:
+      apellido:
+        type: string
+      id:
+        type: integer
+      matricula:
+        type: string
+      nombre:
+        type: string
+    required:
+    - apellido
+    - matricula
+    - nombre
+    type: object
   turno.Turno:
     properties:
       dentistaId:
@@ -21,6 +36,103 @@ info:
   title: Certified Tech Developer - Dentistas
   version: "1.0"
 paths:
+  /dentist:
+    post:
+      consumes:
+      - application/json
+      description: Add a dentist
+      parameters:
+      - description: Dentist
+        in: body
+        name: dentist
+        required: true
+        schema:
+          $ref: '#/definitions/dentist.Dentist'
+      - description: Token
+        in: header
+        name: TOKEN
+        type: string
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/dentist.Dentist'
+      summary: Add a dentist
+      tags:
+      - dentists
+  /dentist/{id}:
+    delete:
+      description: Delete a dentist
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Token
+        in: header
+        name: TOKEN
+        type: string
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: dentist deleted
+          schema:
+            type: string
+      summary: Delete a dentist
+      tags:
+      - dentists
+    get:
+      description: Get dentist by ID
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dentist.Dentist'
+      summary: Get dentist by ID
+      tags:
+      - dentists
+    put:
+      consumes:
+      - application/json
+      description: Update a dentist
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Dentist
+        in: body
+        name: turno
+        required: true
+        schema:
+          $ref: '#/definitions/dentist.Dentist'
+      - description: Token
+        in: header
+        name: TOKEN
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dentist.Dentist'
+      summary: Update a dentist
+      tags:
+      - dentists
   /turno:
     get:
       description: Get turnos by Paciente ID
@@ -53,6 +165,10 @@ paths:
         required: true
         schema:
           $ref: '#/definitions/turno.Turno'
+      - description: Token
+        in: header
+        name: TOKEN
+        type: string
       produces:
       - application/json
       responses:
@@ -71,6 +187,10 @@ paths:
         in: path
         name: id
         required: true
+        type: string
+      - description: Token
+        in: header
+        name: TOKEN
         type: string
       produces:
       - application/json
@@ -110,6 +230,10 @@ paths:
         name: id
         required: true
         type: string
+      - description: Token
+        in: header
+        name: TOKEN
+        type: string
       - description: Turno
         in: body
         name: turno
@@ -142,6 +266,10 @@ paths:
         required: true
         schema:
           $ref: '#/definitions/turno.Turno'
+      - description: Token
+        in: header
+        name: TOKEN
+        type: string
       produces:
       - application/json
       responses:

@@ -50,13 +50,14 @@ func (d *DentistHandler) GetDentistByID(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, dentist)
 }
 
-// AddTurno godoc
+// Create godoc
 // @Summary Add a dentist
 // @Description Add a dentist
 // @Tags dentists
 // @Accept  json
 // @Produce  json
 // @Param dentist body dentist.Dentist true "Dentist"
+// @Param TOKEN header string false "Token"
 // @Success 201 {object} dentist.Dentist
 // @Router /dentist [post]
 func (d *DentistHandler) Create(ctx *gin.Context) {
@@ -82,6 +83,7 @@ func (d *DentistHandler) Create(ctx *gin.Context) {
 // @Produce  json
 // @Param id path string true "ID"
 // @Param turno body dentist.Dentist true "Dentist"
+// @Param TOKEN header string false "Token"
 // @Success 200 {object} dentist.Dentist
 // @Router /dentist/{id} [put]
 func (d *DentistHandler) Update(ctx *gin.Context) {
@@ -103,7 +105,7 @@ func (d *DentistHandler) Update(ctx *gin.Context) {
 	ctx.JSON(http.StatusCreated, response)
 }
 
-// SomeUpdate godoc
+// Patch godoc
 // @Summary Update a dentist with a patch
 // @Description Update a dentist with a patch
 // @Tags dentists
@@ -111,6 +113,7 @@ func (d *DentistHandler) Update(ctx *gin.Context) {
 // @Produce  json
 // @Param id path string true "ID"
 // @Param turno body dentist.Dentist true "Dentist"
+// @Param TOKEN header string false "Token"
 // @Success 200 {object} dentist.Dentist
 // @Router /turno/{id} [patch]
 func (d *DentistHandler) Patch(ctx *gin.Context) {
@@ -141,7 +144,8 @@ func (d *DentistHandler) Patch(ctx *gin.Context) {
 // @Tags dentists
 // @Produce  json
 // @Param id path string true "ID"
-// @Success 200 {string}
+// @Param TOKEN header string false "Token"
+// @Success 204 {string} string "dentist deleted"
 // @Router /dentist/{id} [delete]
 func (d *DentistHandler) Delete(ctx *gin.Context) {
 	id, err := utils.ValidateId(ctx)
