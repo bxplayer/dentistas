@@ -1,4 +1,4 @@
-package handler
+package patientHandler
 
 import (
 	"dentistas/internal/utils"
