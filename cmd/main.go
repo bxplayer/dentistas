@@ -47,7 +47,7 @@ func main() {
 	docs.SwaggerInfo.Host = os.Getenv("HOST")
 	router.GET("/docs/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
-	// Configuracion de DentistaId
+	// Configuracion de Dentista
 	myDatabase := database.NewDatabase(mysqlDatabase)
 
 	dentistService := dentist.NewService(myDatabase)
@@ -69,8 +69,13 @@ func main() {
 	turnoGroup.PATCH("/:id", turnoHandlerPro.SomeUpdate)
 
 	err = router.Run()
-
 	if err != nil {
 		panic(err)
 	}
+
+	err = mysqlDatabase.Close()
+	if err != nil {
+		return
+	}
+
 }

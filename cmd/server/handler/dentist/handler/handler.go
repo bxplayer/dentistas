@@ -27,6 +27,14 @@ func NewDentistHandler(
 	}
 }
 
+// GetDentistByID godoc
+// @Summary Get dentist by ID
+// @Description Get dentist by ID
+// @Tags dentists
+// @Produce json
+// @Param id path string true "ID"
+// @Success 200 {object} dentist.Dentist
+// @Router /dentist/{id} [get]
 func (d *DentistHandler) GetDentistByID(ctx *gin.Context) {
 
 	id, err := utils.ValidateId(ctx)
@@ -42,6 +50,15 @@ func (d *DentistHandler) GetDentistByID(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, dentist)
 }
 
+// AddTurno godoc
+// @Summary Add a dentist
+// @Description Add a dentist
+// @Tags dentists
+// @Accept  json
+// @Produce  json
+// @Param dentist body dentist.Dentist true "Dentist"
+// @Success 201 {object} dentist.Dentist
+// @Router /dentist [post]
 func (d *DentistHandler) Create(ctx *gin.Context) {
 
 	newDentist, err := utils.ToDentist(ctx)
@@ -57,6 +74,16 @@ func (d *DentistHandler) Create(ctx *gin.Context) {
 	ctx.JSON(http.StatusCreated, response)
 }
 
+// Update godoc
+// @Summary Update a dentist
+// @Description Update a dentist
+// @Tags dentists
+// @Accept  json
+// @Produce  json
+// @Param id path string true "ID"
+// @Param turno body dentist.Dentist true "Dentist"
+// @Success 200 {object} dentist.Dentist
+// @Router /dentist/{id} [put]
 func (d *DentistHandler) Update(ctx *gin.Context) {
 	id, err := utils.ValidateId(ctx)
 	if err != nil {
@@ -76,6 +103,16 @@ func (d *DentistHandler) Update(ctx *gin.Context) {
 	ctx.JSON(http.StatusCreated, response)
 }
 
+// SomeUpdate godoc
+// @Summary Update a dentist with a patch
+// @Description Update a dentist with a patch
+// @Tags dentists
+// @Accept  json
+// @Produce  json
+// @Param id path string true "ID"
+// @Param turno body dentist.Dentist true "Dentist"
+// @Success 200 {object} dentist.Dentist
+// @Router /turno/{id} [patch]
 func (d *DentistHandler) Patch(ctx *gin.Context) {
 
 	id, err := utils.ValidateId(ctx)
@@ -98,6 +135,14 @@ func (d *DentistHandler) Patch(ctx *gin.Context) {
 	ctx.JSON(http.StatusCreated, response)
 }
 
+// Delete godoc
+// @Summary Delete a dentist
+// @Description Delete a dentist
+// @Tags dentists
+// @Produce  json
+// @Param id path string true "ID"
+// @Success 200 {string}
+// @Router /dentist/{id} [delete]
 func (d *DentistHandler) Delete(ctx *gin.Context) {
 	id, err := utils.ValidateId(ctx)
 	if err != nil {

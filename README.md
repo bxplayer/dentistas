@@ -10,6 +10,11 @@ docker-compose up
 
 #### Dentist
 
+La seguridad usada es mediante un token enviado como cabecera.
+```
+TOKEN: tokenDePoder
+```
+
 ###### GET: localhost:8080/dentist/34
 ```
 curl --location 'localhost:8080/dentist/34' 
@@ -18,6 +23,7 @@ curl --location 'localhost:8080/dentist/34'
 ###### POST : localhost:8080/dentist/
 ```
 curl --location 'localhost:8080/dentist/' \
+--header 'TOKEN: tokenDePoder' \
 --header 'Content-Type: application/json' \
 --data '{
 	"apellido" : "maria",
@@ -28,6 +34,7 @@ curl --location 'localhost:8080/dentist/' \
 ###### PUT : localhost:8080/dentist/34
 ```
 curl --location --request PUT 'localhost:8080/dentist/34' \
+--header 'TOKEN: tokenDePoder' \
 --header 'Content-Type: application/json' \
 --data '{
 	"apellido" : "Ernesto",
@@ -38,6 +45,7 @@ curl --location --request PUT 'localhost:8080/dentist/34' \
 ###### PATCH : localhost:8080/dentist/34
 ```
 curl --location --request PATCH 'localhost:8080/dentist/34' \
+--header 'TOKEN: tokenDePoder' \
 --header 'Content-Type: application/json' \
 --data '{
 	"apellido" : "Medicus"
@@ -45,5 +53,6 @@ curl --location --request PATCH 'localhost:8080/dentist/34' \
 ```
 ###### DELETE : localhost:8080/dentist/34
 ```
-curl --location --request DELETE 'localhost:8080/dentist/34'
+curl --location --request DELETE 'localhost:8080/dentist/34' \
+--header 'TOKEN: tokenDePoder' \
 ```
