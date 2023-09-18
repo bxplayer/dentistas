@@ -49,6 +49,13 @@ func (s *SqlStore) Create(turnoParam turno.Turno) (turno.Turno, error) {
 		return turno.Turno{}, err
 	}
 
+	var id int64
+	err = s.DB.QueryRow("SELECT LAST_INSERT_ID()").Scan(&id)
+	if err != nil {
+		return turno.Turno{}, err
+	}
+
+	turnoParam.ID = int(id)
 	return turnoParam, nil
 
 }
@@ -78,6 +85,7 @@ func (s *SqlStore) Update(id int, turnoParam turno.Turno) (turno.Turno, error) {
 		return turno.Turno{}, err
 	}
 
+	turnoParam.ID = id
 	return turnoParam, nil
 }
 
