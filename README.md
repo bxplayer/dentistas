@@ -8,14 +8,14 @@ docker-compose up
 
 # Endpoints
 
-####Dentist
+#### Dentist
 
-######GET: localhost:8080/dentist/34
+###### GET: localhost:8080/dentist/34
 ```
 curl --location 'localhost:8080/dentist/34' 
 ```
 
-######POST : localhost:8080/dentist/
+###### POST : localhost:8080/dentist/
 ```
 curl --location 'localhost:8080/dentist/' \
 --header 'Content-Type: application/json' \
@@ -25,7 +25,7 @@ curl --location 'localhost:8080/dentist/' \
 	"matricula" : "3123123"
 }'
 ```
-######PUT : localhost:8080/dentist/34
+###### PUT : localhost:8080/dentist/34
 ```
 curl --location --request PUT 'localhost:8080/dentist/34' \
 --header 'Content-Type: application/json' \
@@ -35,7 +35,7 @@ curl --location --request PUT 'localhost:8080/dentist/34' \
 	"matricula" : "3123123"
 }'
 ```
-######PATCH : localhost:8080/dentist/34
+###### PATCH : localhost:8080/dentist/34
 ```
 curl --location --request PATCH 'localhost:8080/dentist/34' \
 --header 'Content-Type: application/json' \
@@ -43,7 +43,7 @@ curl --location --request PATCH 'localhost:8080/dentist/34' \
 	"apellido" : "Medicus"
 }'
 ```
-######DELETE : localhost:8080/dentist/34
+###### DELETE : localhost:8080/dentist/34
 ```
 curl --location --request DELETE 'localhost:8080/dentist/34'
 ```
