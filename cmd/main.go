@@ -2,16 +2,29 @@ package main
 
 import (
 	"dentistas/cmd/server/external/database"
+	"dentistas/cmd/server/external/database/turnoRepository"
 	"dentistas/cmd/server/handler/dentist/handler"
+	"dentistas/cmd/server/handler/turnoHandler"
 	dentistRoutes "dentistas/cmd/server/routes/dentist"
+	"dentistas/docs"
 	"dentistas/internal/dentist"
 	patientRoutes "dentistas/cmd/server/routes/patient"
 	"dentistas/internal/patient"
+	"dentistas/internal/turno"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 	"log"
 	"os"
 )
+
+// @title Certified Tech Developer - Dentistas
+// @version 1.0
+// @description This API Handle Products.
+
+// @license.name Apache 2.0
+// @license.url http://www.apache.org/licenses/LICENSE-2.0.html
 
 func main() {
 
@@ -33,6 +46,10 @@ func main() {
 		panic(err)
 	}
 
+	docs.SwaggerInfo.Host = os.Getenv("HOST")
+	router.GET("/docs/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+
+	// Configuracion de DentistaId
 	myDatabase := database.NewDatabase(mysqlDatabase)
 
 	dentistService := dentist.NewService(myDatabase)
@@ -48,6 +65,17 @@ func main() {
 	patientHandlerPo := handler.NewPatientHandler(patientService, patientService, patientService, patientService)
 
 	patientRoutes.SetupPatientRouter(router, patientHandlerPo)
+	// Configuracion de Turno
+	turnoDatabase := turnoRepository.NewDatabase(mysqlDatabase)
+	turnoService := turno.NewService(turnoDatabase)
+	turnoHandlerPro := turnoHandler.NewTurnoHandler(turnoService, turnoService, turnoService, turnoService)
+	turnoGroup := router.Group("/turno")
+	turnoGroup.GET("/:id", turnoHandlerPro.GetTurnoByID)
+	turnoGroup.GET("/", turnoHandlerPro.GetByPacienteDNI)
+	turnoGroup.POST("/", turnoHandlerPro.AddTurno)
+	turnoGroup.PUT("/:id", turnoHandlerPro.Update)
+	turnoGroup.DELETE("/:id", turnoHandlerPro.DeleteByID)
+	turnoGroup.PATCH("/:id", turnoHandlerPro.SomeUpdate)
 
 	err = router.Run()
 

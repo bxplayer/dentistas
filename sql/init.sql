@@ -1,101 +1,31 @@
-CREATE TABLE IF NOT EXISTS dentista
-(
-    id
-    INT
-    NOT
-    NULL
-    AUTO_INCREMENT,
-    apellido
-    VARCHAR
-(
-    100
-) NOT NULL,
-    nombre VARCHAR
-(
-    100
-) NOT NULL,
-    matricula VARCHAR
-(
-    50
-) NOT NULL,
-    PRIMARY KEY
-(
-    id
-)
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+CREATE TABLE IF NOT EXISTS  dentista (
+  id INT NOT NULL AUTO_INCREMENT,
+  apellido VARCHAR(100) NOT NULL,
+  nombre VARCHAR(100) NOT NULL,
+  matricula VARCHAR(50) NOT NULL,
+  PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE IF NOT EXISTS paciente
-(
-    id
-    INT
-    NOT
-    NULL
-    AUTO_INCREMENT,
-    nombre
-    VARCHAR
-(
-    50
-) NOT NULL,
-    apellido VARCHAR
-(
-    50
-) NOT NULL,
-    domicilio VARCHAR
-(
-    100
-) NOT NULL,
-    DNI VARCHAR
-(
-    20
-) NOT NULL,
-    fecha_alta DATE NOT NULL,
-    PRIMARY KEY
-(
-    id
-)
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+CREATE TABLE IF NOT EXISTS  paciente (
+  id INT NOT NULL AUTO_INCREMENT,
+  nombre VARCHAR(50) NOT NULL,
+  apellido VARCHAR(50) NOT NULL,
+  domicilio VARCHAR(100) NOT NULL,
+  DNI VARCHAR(20) NOT NULL,
+  fecha_alta DATE NOT NULL,
+  PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE IF NOT EXISTS turno
-(
-    id
-    INT
-    NOT
-    NULL
-    AUTO_INCREMENT,
-    descripcion
-    TEXT,
-    fecha_hora
-    DATETIME
-    NOT
-    NULL,
-    paciente_id
-    INT
-    NOT
-    NULL,
-    dentista_id
-    INT
-    NOT
-    NULL,
-    PRIMARY
-    KEY
-(
-    id
-),
-    FOREIGN KEY
-(
-    paciente_id
-) REFERENCES paciente
-(
-    id
-),
-    FOREIGN KEY
-(
-    dentista_id
-) REFERENCES dentista
-(
-    id
-)
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+CREATE TABLE IF NOT EXISTS  turno (
+  id INT NOT NULL AUTO_INCREMENT,
+  descripcion TEXT,
+  fecha_hora DATETIME NOT NULL,
+  paciente_id INT NOT NULL,
+  dentista_id INT NOT NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (paciente_id) REFERENCES paciente(id),
+  FOREIGN KEY (dentista_id) REFERENCES dentista(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 INSERT INTO dentista (apellido, nombre, matricula)
