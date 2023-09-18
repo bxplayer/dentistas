@@ -28,6 +28,14 @@ func NewTurnoHandler(
 	}
 }
 
+// GetByID godoc
+// @Summary Get turno by ID
+// @Description Get turno by ID
+// @Tags turnos
+// @Produce json
+// @Param id path string true "ID"
+// @Success 200 {object} turno.Turno
+// @Router /turno/{id} [get]
 func (t *TurnoHandler) GetTurnoByID(ctx *gin.Context) {
 	idParam := ctx.Param("id")
 	id, err := strconv.Atoi(idParam)
@@ -43,6 +51,15 @@ func (t *TurnoHandler) GetTurnoByID(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, turno)
 }
 
+// AddTurno godoc
+// @Summary Add a turno
+// @Description Add a turno
+// @Tags turnos
+// @Accept  json
+// @Produce  json
+// @Param turno body turno.Turno true "Turno"
+// @Success 201 {object} turno.Turno
+// @Router /turno [post]
 func (t *TurnoHandler) AddTurno(ctx *gin.Context) {
 	turnoRequest := turno2.Turno{}
 	if err := ctx.ShouldBindBodyWith(&turnoRequest, binding.JSON); err != nil {
@@ -57,6 +74,16 @@ func (t *TurnoHandler) AddTurno(ctx *gin.Context) {
 	ctx.JSON(http.StatusCreated, turno)
 }
 
+// Update godoc
+// @Summary Update a turno
+// @Description Update a turno
+// @Tags turnos
+// @Accept  json
+// @Produce  json
+// @Param id path string true "ID"
+// @Param turno body turno.Turno true "Turno"
+// @Success 200 {object} turno.Turno
+// @Router /turno/{id} [put]
 func (t *TurnoHandler) Update(ctx *gin.Context) {
 	idParam := ctx.Param("id")
 	id, err := strconv.Atoi(idParam)
@@ -78,6 +105,14 @@ func (t *TurnoHandler) Update(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, turno)
 }
 
+// DeleteByID godoc
+// @Summary Delete a turno
+// @Description Delete a turno
+// @Tags turnos
+// @Produce  json
+// @Param id path string true "ID"
+// @Success 200 {string} string "turno deleted"
+// @Router /turno/{id} [delete]
 func (t *TurnoHandler) DeleteByID(ctx *gin.Context) {
 	idParam := ctx.Param("id")
 	id, err := strconv.Atoi(idParam)
@@ -93,6 +128,14 @@ func (t *TurnoHandler) DeleteByID(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, gin.H{"message": "turno deleted"})
 }
 
+// GetByDentistaID godoc
+// @Summary Get turnos by Dentista ID
+// @Description Get turnos by Dentista ID
+// @Tags turnos
+// @Produce json
+// @Param id path string true "ID"
+// @Success 200 {object} []turno.Turno
+// @Router /turno/dni/{id} [get]
 func (t *TurnoHandler) GetByPacienteDNI(ctx *gin.Context) {
 	dni := ctx.Param("dni")
 	turnos, err := t.turnoGetter.GetByPacienteDNI(dni)
@@ -103,6 +146,16 @@ func (t *TurnoHandler) GetByPacienteDNI(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, turnos)
 }
 
+// SomeUpdate godoc
+// @Summary Update a turno with a patch
+// @Description Update a turno with a patch
+// @Tags turnos
+// @Accept  json
+// @Produce  json
+// @Param id path string true "ID"
+// @Param turno body turno.Turno true "Turno"
+// @Success 200 {object} turno.Turno
+// @Router /turno/{id} [patch]
 func (t *TurnoHandler) SomeUpdate(ctx *gin.Context) {
 	idParam := ctx.Param("id")
 	id, err := strconv.Atoi(idParam)

@@ -5,13 +5,23 @@ import (
 	"dentistas/cmd/server/external/database/turnoRepository"
 	"dentistas/cmd/server/handler/dentist/handler"
 	"dentistas/cmd/server/handler/turnoHandler"
+	"dentistas/docs"
 	"dentistas/internal/dentist"
 	"dentistas/internal/turno"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 	"log"
 	"os"
 )
+
+// @title Certified Tech Developer - Dentistas
+// @version 1.0
+// @description This API Handle Products.
+
+// @license.name Apache 2.0
+// @license.url http://www.apache.org/licenses/LICENSE-2.0.html
 
 func main() {
 
@@ -32,6 +42,9 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+
+	docs.SwaggerInfo.Host = os.Getenv("HOST")
+	router.GET("/docs/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 	// Configuracion de DentistaId
 	myDatabase := database.NewDatabase(mysqlDatabase)
