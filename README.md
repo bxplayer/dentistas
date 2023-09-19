@@ -124,6 +124,7 @@ curl --location 'localhost:8080/patient/1'
 ###### POST : localhost:8080/patient/
 ```
 curl --location 'localhost:8080/patient/' \
+--header 'TOKEN: tokenDePoder' \
 --header 'Content-Type: application/json' \
 --data '{
     "apellido": "Martha",
@@ -136,6 +137,7 @@ curl --location 'localhost:8080/patient/' \
 ###### PUT : localhost:8080/patient/6
 ```
 curl --location --request PUT 'localhost:8080/patient/6' \
+--header 'TOKEN: tokenDePoder' \
 --header 'Content-Type: application/json' \
 --data '{
     "apellido": "Marta",
@@ -148,6 +150,7 @@ curl --location --request PUT 'localhost:8080/patient/6' \
 ###### PATCH : localhost:8080/patient/6
 ```
 curl --location --request PATCH 'localhost:8080/patient/6' \
+--header 'TOKEN: tokenDePoder' \
 --header 'Content-Type: application/json' \
 --data '{
     "apellido": "Marta",
@@ -159,6 +162,7 @@ curl --location --request PATCH 'localhost:8080/patient/6' \
 ```
 ###### DELETE : localhost:8080/patient/6
 ```
-curl --location --request DELETE 'localhost:8080/patient/6'
+curl --location --request DELETE 'localhost:8080/patient/6' \
+--header 'TOKEN: tokenDePoder' \
 ```
 
