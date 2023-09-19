@@ -1,11 +1,11 @@
 package patient
 
 import (
-	eeee "dentistas/cmd/server/handler/patient"
+	handler "dentistas/cmd/server/handler/patient"
 	"github.com/gin-gonic/gin"
 )
 
-func SetupPatientRouter(router *gin.Engine, patientHandler *eeee.PatientHandler) {
+func SetupPatientRouter(router *gin.Engine, patientHandler *handler.PatientHandler) {
 
 	patientGroup := router.Group("/patient")
 	{

@@ -27,6 +27,15 @@ func NewPatientHandler(
 	}
 }
 
+
+// GetPatientById godoc
+// @Summary Get Patient By Id
+// @Tags Patient
+// @Description get patient by Id
+// @Produce  json
+// @Param id path string true "ID"
+// @Success 200 {object} patient.Patient
+// @Router /patient/{id} [get]
 func (p *PatientHandler) GetPatientByID(ctx *gin.Context) {
 
 	id, err := utils.ValidateId(ctx)
@@ -42,6 +51,16 @@ func (p *PatientHandler) GetPatientByID(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, Patient)
 }
 
+// CreatePatient godoc
+// @Summary Create Patient
+// @Tags Patient
+// @Description create patient
+// @Accept  json
+// @Produce  json
+// @Param token header string true "token"
+// @Param product body patient.Patient true "Patient"
+// @Success 201 {object} patient.Patient
+// @Router /patient [post]
 func (p *PatientHandler) Create(ctx *gin.Context) {
 
 	newPatient, err := utils.ToPatient(ctx)
@@ -57,6 +76,16 @@ func (p *PatientHandler) Create(ctx *gin.Context) {
 	ctx.JSON(http.StatusCreated, response)
 }
 
+// UpdatePatient godoc
+// @Summary Update Patient
+// @Tags Patient
+// @Description update patient
+// @Accept  json
+// @Produce  json
+// @Param token header string true "token"
+// @Param patient body request true "Patient to update"
+// @Success 201 {object} web.Response
+// @Router /patient/ [put]
 func (p *PatientHandler) Update(ctx *gin.Context) {
 	id, err := utils.ValidateId(ctx)
 	if err != nil {
@@ -76,6 +105,16 @@ func (p *PatientHandler) Update(ctx *gin.Context) {
 	ctx.JSON(http.StatusCreated, response)
 }
 
+// PatchPatient godoc
+// @Summary Patch Patient
+// @Tags Patient
+// @Description patch patient
+// @Accept  json
+// @Produce  json
+// @Param token header string true "token"
+// @Param patient body request true "Patient to patch"
+// @Success 201 {object} web.Response
+// @Router /patient [patch]
 func (p *PatientHandler) Patch(ctx *gin.Context) {
 
 	id, err := utils.ValidateId(ctx)
@@ -98,6 +137,16 @@ func (p *PatientHandler) Patch(ctx *gin.Context) {
 	ctx.JSON(http.StatusCreated, response)
 }
 
+// DeletePatiend godoc
+// @Summary Delete Patient
+// @Tags Patient
+// @Description delete patient
+// @Accept  json
+// @Produce  json
+// @Param token header string true "token"
+// @Param id query string true "id"
+// @Success 204 {object} web.Response
+// @Router /patient [delete]
 func (p *PatientHandler) Delete(ctx *gin.Context) {
 	id, err := utils.ValidateId(ctx)
 	if err != nil {
