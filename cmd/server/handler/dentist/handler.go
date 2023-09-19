@@ -56,8 +56,8 @@ func (d *DentistHandler) GetDentistByID(ctx *gin.Context) {
 // @Tags dentists
 // @Accept  json
 // @Produce  json
-// @Param dentist body dentist.Dentist true "Dentist"
 // @Param TOKEN header string false "Token"
+// @Param dentist body dentist.Dentist true "Dentist"
 // @Success 201 {object} dentist.Dentist
 // @Router /dentist [post]
 func (d *DentistHandler) Create(ctx *gin.Context) {
@@ -81,9 +81,9 @@ func (d *DentistHandler) Create(ctx *gin.Context) {
 // @Tags dentists
 // @Accept  json
 // @Produce  json
+// @Param TOKEN header string false "Token"
 // @Param id path string true "ID"
 // @Param turno body dentist.Dentist true "Dentist"
-// @Param TOKEN header string false "Token"
 // @Success 200 {object} dentist.Dentist
 // @Router /dentist/{id} [put]
 func (d *DentistHandler) Update(ctx *gin.Context) {
@@ -111,9 +111,9 @@ func (d *DentistHandler) Update(ctx *gin.Context) {
 // @Tags dentists
 // @Accept  json
 // @Produce  json
+// @Param TOKEN header string false "Token"
 // @Param id path string true "ID"
 // @Param turno body dentist.Dentist true "Dentist"
-// @Param TOKEN header string false "Token"
 // @Success 200 {object} dentist.Dentist
 // @Router /turno/{id} [patch]
 func (d *DentistHandler) Patch(ctx *gin.Context) {
@@ -143,8 +143,8 @@ func (d *DentistHandler) Patch(ctx *gin.Context) {
 // @Description Delete a dentist
 // @Tags dentists
 // @Produce  json
-// @Param id path string true "ID"
 // @Param TOKEN header string false "Token"
+// @Param id path string true "ID"
 // @Success 204 {string} string "dentist deleted"
 // @Router /dentist/{id} [delete]
 func (d *DentistHandler) Delete(ctx *gin.Context) {

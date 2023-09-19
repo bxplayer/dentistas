@@ -63,16 +63,16 @@ paths:
       - application/json
       description: Add a dentist
       parameters:
+      - description: Token
+        in: header
+        name: TOKEN
+        type: string
       - description: Dentist
         in: body
         name: dentist
         required: true
         schema:
           $ref: '#/definitions/dentist.Dentist'
-      - description: Token
-        in: header
-        name: TOKEN
-        type: string
       produces:
       - application/json
       responses:
@@ -87,14 +87,14 @@ paths:
     delete:
       description: Delete a dentist
       parameters:
+      - description: Token
+        in: header
+        name: TOKEN
+        type: string
       - description: ID
         in: path
         name: id
         required: true
-        type: string
-      - description: Token
-        in: header
-        name: TOKEN
         type: string
       produces:
       - application/json
@@ -129,6 +129,10 @@ paths:
       - application/json
       description: Update a dentist
       parameters:
+      - description: Token
+        in: header
+        name: TOKEN
+        type: string
       - description: ID
         in: path
         name: id
@@ -140,10 +144,6 @@ paths:
         required: true
         schema:
           $ref: '#/definitions/dentist.Dentist'
-      - description: Token
-        in: header
-        name: TOKEN
-        type: string
       produces:
       - application/json
       responses:
@@ -297,16 +297,16 @@ paths:
       - application/json
       description: Add a turno
       parameters:
+      - description: Token
+        in: header
+        name: TOKEN
+        type: string
       - description: Turno
         in: body
         name: turno
         required: true
         schema:
           $ref: '#/definitions/turno.Turno'
-      - description: Token
-        in: header
-        name: TOKEN
-        type: string
       produces:
       - application/json
       responses:
@@ -321,14 +321,14 @@ paths:
     delete:
       description: Delete a turno
       parameters:
+      - description: Token
+        in: header
+        name: TOKEN
+        type: string
       - description: ID
         in: path
         name: id
         required: true
-        type: string
-      - description: Token
-        in: header
-        name: TOKEN
         type: string
       produces:
       - application/json
@@ -363,14 +363,14 @@ paths:
       - application/json
       description: Update a turno with a patch
       parameters:
+      - description: Token
+        in: header
+        name: TOKEN
+        type: string
       - description: ID
         in: path
         name: id
         required: true
-        type: string
-      - description: Token
-        in: header
-        name: TOKEN
         type: string
       - description: Turno
         in: body
@@ -393,6 +393,10 @@ paths:
       - application/json
       description: Update a turno
       parameters:
+      - description: Token
+        in: header
+        name: TOKEN
+        type: string
       - description: ID
         in: path
         name: id
@@ -404,10 +408,6 @@ paths:
         required: true
         schema:
           $ref: '#/definitions/turno.Turno'
-      - description: Token
-        in: header
-        name: TOKEN
-        type: string
       produces:
       - application/json
       responses:

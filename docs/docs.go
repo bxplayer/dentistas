@@ -34,6 +34,12 @@ const docTemplate = `{
                 "summary": "Add a dentist",
                 "parameters": [
                     {
+                        "type": "string",
+                        "description": "Token",
+                        "name": "TOKEN",
+                        "in": "header"
+                    },
+                    {
                         "description": "Dentist",
                         "name": "dentist",
                         "in": "body",
@@ -41,12 +47,6 @@ const docTemplate = `{
                         "schema": {
                             "$ref": "#/definitions/dentist.Dentist"
                         }
-                    },
-                    {
-                        "type": "string",
-                        "description": "Token",
-                        "name": "TOKEN",
-                        "in": "header"
                     }
                 ],
                 "responses": {
@@ -102,6 +102,12 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "type": "string",
+                        "description": "Token",
+                        "name": "TOKEN",
+                        "in": "header"
+                    },
+                    {
+                        "type": "string",
                         "description": "ID",
                         "name": "id",
                         "in": "path",
@@ -115,12 +121,6 @@ const docTemplate = `{
                         "schema": {
                             "$ref": "#/definitions/dentist.Dentist"
                         }
-                    },
-                    {
-                        "type": "string",
-                        "description": "Token",
-                        "name": "TOKEN",
-                        "in": "header"
                     }
                 ],
                 "responses": {
@@ -144,16 +144,16 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "type": "string",
+                        "description": "Token",
+                        "name": "TOKEN",
+                        "in": "header"
+                    },
+                    {
+                        "type": "string",
                         "description": "ID",
                         "name": "id",
                         "in": "path",
                         "required": true
-                    },
-                    {
-                        "type": "string",
-                        "description": "Token",
-                        "name": "TOKEN",
-                        "in": "header"
                     }
                 ],
                 "responses": {
@@ -388,6 +388,12 @@ const docTemplate = `{
                 "summary": "Add a turno",
                 "parameters": [
                     {
+                        "type": "string",
+                        "description": "Token",
+                        "name": "TOKEN",
+                        "in": "header"
+                    },
+                    {
                         "description": "Turno",
                         "name": "turno",
                         "in": "body",
@@ -395,12 +401,6 @@ const docTemplate = `{
                         "schema": {
                             "$ref": "#/definitions/turno.Turno"
                         }
-                    },
-                    {
-                        "type": "string",
-                        "description": "Token",
-                        "name": "TOKEN",
-                        "in": "header"
                     }
                 ],
                 "responses": {
@@ -456,6 +456,12 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "type": "string",
+                        "description": "Token",
+                        "name": "TOKEN",
+                        "in": "header"
+                    },
+                    {
+                        "type": "string",
                         "description": "ID",
                         "name": "id",
                         "in": "path",
@@ -469,12 +475,6 @@ const docTemplate = `{
                         "schema": {
                             "$ref": "#/definitions/turno.Turno"
                         }
-                    },
-                    {
-                        "type": "string",
-                        "description": "Token",
-                        "name": "TOKEN",
-                        "in": "header"
                     }
                 ],
                 "responses": {
@@ -498,16 +498,16 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "type": "string",
+                        "description": "Token",
+                        "name": "TOKEN",
+                        "in": "header"
+                    },
+                    {
+                        "type": "string",
                         "description": "ID",
                         "name": "id",
                         "in": "path",
                         "required": true
-                    },
-                    {
-                        "type": "string",
-                        "description": "Token",
-                        "name": "TOKEN",
-                        "in": "header"
                     }
                 ],
                 "responses": {
@@ -534,16 +534,16 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "type": "string",
+                        "description": "Token",
+                        "name": "TOKEN",
+                        "in": "header"
+                    },
+                    {
+                        "type": "string",
                         "description": "ID",
                         "name": "id",
                         "in": "path",
                         "required": true
-                    },
-                    {
-                        "type": "string",
-                        "description": "Token",
-                        "name": "TOKEN",
-                        "in": "header"
                     },
                     {
                         "description": "Turno",
