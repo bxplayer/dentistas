@@ -1,7 +1,7 @@
 package routes
 
 import (
-	handlerDentist "dentistas/cmd/server/handler/dentist/handler"
+	handlerDentist "dentistas/cmd/server/handler/dentist"
 	handlerTurn "dentistas/cmd/server/handler/turnoHandler"
 	"dentistas/cmd/server/middleware"
 	"github.com/gin-gonic/gin"
