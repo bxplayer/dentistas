@@ -57,7 +57,7 @@ func (p *PatientHandler) GetPatientByID(ctx *gin.Context) {
 // @Description create patient
 // @Accept  json
 // @Produce  json
-// @Param token header string true "token"
+// @Param TOKEN header string true "Token"
 // @Param product body patient.Patient true "Patient"
 // @Success 201 {object} patient.Patient
 // @Router /patient [post]
@@ -82,10 +82,10 @@ func (p *PatientHandler) Create(ctx *gin.Context) {
 // @Description update patient
 // @Accept  json
 // @Produce  json
-// @Param token header string true "token"
-// @Param patient body request true "Patient to update"
-// @Success 201 {object} web.Response
-// @Router /patient/ [put]
+// @Param TOKEN header string false "Token"
+// @Param patient body patient.Patient true "Patient"
+// @Success 201 {object} patient.Patient
+// @Router /patient/{id} [put]
 func (p *PatientHandler) Update(ctx *gin.Context) {
 	id, err := utils.ValidateId(ctx)
 	if err != nil {
@@ -111,10 +111,10 @@ func (p *PatientHandler) Update(ctx *gin.Context) {
 // @Description patch patient
 // @Accept  json
 // @Produce  json
-// @Param token header string true "token"
-// @Param patient body request true "Patient to patch"
-// @Success 201 {object} web.Response
-// @Router /patient [patch]
+// @Param TOKEN header string false "Token"
+// @Param patient body patient.Patient true "Patient"
+// @Success 201 {object} patient.Patient
+// @Router /patient/{id} [patch]
 func (p *PatientHandler) Patch(ctx *gin.Context) {
 
 	id, err := utils.ValidateId(ctx)
@@ -141,12 +141,11 @@ func (p *PatientHandler) Patch(ctx *gin.Context) {
 // @Summary Delete Patient
 // @Tags Patient
 // @Description delete patient
-// @Accept  json
 // @Produce  json
-// @Param token header string true "token"
+// @Param TOKEN header string true "Token"
 // @Param id query string true "id"
-// @Success 204 {object} web.Response
-// @Router /patient [delete]
+// @Success 204
+// @Router /patient/{id} [delete]
 func (p *PatientHandler) Delete(ctx *gin.Context) {
 	id, err := utils.ValidateId(ctx)
 	if err != nil {

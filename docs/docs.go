@@ -166,6 +166,183 @@ const docTemplate = `{
                 }
             }
         },
+        "/patient": {
+            "post": {
+                "description": "create patient",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Patient"
+                ],
+                "summary": "Create Patient",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Token",
+                        "name": "TOKEN",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "description": "Patient",
+                        "name": "product",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/patient.Patient"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/patient.Patient"
+                        }
+                    }
+                }
+            }
+        },
+        "/patient/{id}": {
+            "get": {
+                "description": "get patient by Id",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Patient"
+                ],
+                "summary": "Get Patient By Id",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/patient.Patient"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "update patient",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Patient"
+                ],
+                "summary": "Update Patient",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Token",
+                        "name": "TOKEN",
+                        "in": "header"
+                    },
+                    {
+                        "description": "Patient",
+                        "name": "patient",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/patient.Patient"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/patient.Patient"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "delete patient",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Patient"
+                ],
+                "summary": "Delete Patient",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Token",
+                        "name": "TOKEN",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "id",
+                        "name": "id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content"
+                    }
+                }
+            },
+            "patch": {
+                "description": "patch patient",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Patient"
+                ],
+                "summary": "Patch Patient",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Token",
+                        "name": "TOKEN",
+                        "in": "header"
+                    },
+                    {
+                        "description": "Patient",
+                        "name": "patient",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/patient.Patient"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/patient.Patient"
+                        }
+                    }
+                }
+            }
+        },
         "/turno": {
             "get": {
                 "description": "Get turnos by Paciente ID",
@@ -406,6 +583,36 @@ const docTemplate = `{
                 },
                 "matricula": {
                     "type": "string"
+                },
+                "nombre": {
+                    "type": "string"
+                }
+            }
+        },
+        "patient.Patient": {
+            "type": "object",
+            "required": [
+                "apellido",
+                "dni",
+                "domicilio",
+                "fecha_alta",
+                "nombre"
+            ],
+            "properties": {
+                "apellido": {
+                    "type": "string"
+                },
+                "dni": {
+                    "type": "string"
+                },
+                "domicilio": {
+                    "type": "string"
+                },
+                "fecha_alta": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
                 },
                 "nombre": {
                     "type": "string"

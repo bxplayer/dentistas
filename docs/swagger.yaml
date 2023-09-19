@@ -14,6 +14,27 @@ definitions:
     - matricula
     - nombre
     type: object
+  patient.Patient:
+    properties:
+      apellido:
+        type: string
+      dni:
+        type: string
+      domicilio:
+        type: string
+      fecha_alta:
+        type: string
+      id:
+        type: integer
+      nombre:
+        type: string
+    required:
+    - apellido
+    - dni
+    - domicilio
+    - fecha_alta
+    - nombre
+    type: object
   turno.Turno:
     properties:
       dentistaId:
@@ -133,6 +154,123 @@ paths:
       summary: Update a dentist
       tags:
       - dentists
+  /patient:
+    post:
+      consumes:
+      - application/json
+      description: create patient
+      parameters:
+      - description: Token
+        in: header
+        name: TOKEN
+        required: true
+        type: string
+      - description: Patient
+        in: body
+        name: product
+        required: true
+        schema:
+          $ref: '#/definitions/patient.Patient'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/patient.Patient'
+      summary: Create Patient
+      tags:
+      - Patient
+  /patient/{id}:
+    delete:
+      description: delete patient
+      parameters:
+      - description: Token
+        in: header
+        name: TOKEN
+        required: true
+        type: string
+      - description: id
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+      summary: Delete Patient
+      tags:
+      - Patient
+    get:
+      description: get patient by Id
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/patient.Patient'
+      summary: Get Patient By Id
+      tags:
+      - Patient
+    patch:
+      consumes:
+      - application/json
+      description: patch patient
+      parameters:
+      - description: Token
+        in: header
+        name: TOKEN
+        type: string
+      - description: Patient
+        in: body
+        name: patient
+        required: true
+        schema:
+          $ref: '#/definitions/patient.Patient'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/patient.Patient'
+      summary: Patch Patient
+      tags:
+      - Patient
+    put:
+      consumes:
+      - application/json
+      description: update patient
+      parameters:
+      - description: Token
+        in: header
+        name: TOKEN
+        type: string
+      - description: Patient
+        in: body
+        name: patient
+        required: true
+        schema:
+          $ref: '#/definitions/patient.Patient'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/patient.Patient'
+      summary: Update Patient
+      tags:
+      - Patient
   /turno:
     get:
       description: Get turnos by Paciente ID
