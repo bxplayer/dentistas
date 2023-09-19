@@ -113,3 +113,52 @@ curl --location --request PATCH 'localhost:8080/turno/4' \
 curl --location --request DELETE 'localhost:8080/turno/5'  \
 --header 'TOKEN: tokenDePoder' \
 ```
+
+#### Patient
+
+###### GET: localhost:8080/patient/1
+```
+curl --location 'localhost:8080/patient/1'
+```
+
+###### POST : localhost:8080/patient/
+```
+curl --location 'localhost:8080/patient/' \
+--header 'Content-Type: application/json' \
+--data '{
+    "apellido": "Martha",
+    "nombre": "Martinez",
+    "domicilio": "Calle Falsa 1234",
+    "dni": "87654321",
+    "fecha_alta": "2023-01-01"
+}'
+```
+###### PUT : localhost:8080/patient/6
+```
+curl --location --request PUT 'localhost:8080/patient/6' \
+--header 'Content-Type: application/json' \
+--data '{
+    "apellido": "Marta",
+    "nombre": "Martinez",
+    "domicilio": "Calle Falsa 1234",
+    "dni": "87654321",
+    "fecha_alta": "2023-01-01"
+}'
+```
+###### PATCH : localhost:8080/patient/6
+```
+curl --location --request PATCH 'localhost:8080/patient/6' \
+--header 'Content-Type: application/json' \
+--data '{
+    "apellido": "Marta",
+    "nombre": "Martinez",
+    "domicilio": "Calle 1234",
+    "dni": "87654321",
+    "fecha_alta": "2023-01-01"
+}'
+```
+###### DELETE : localhost:8080/patient/6
+```
+curl --location --request DELETE 'localhost:8080/patient/6'
+```
+

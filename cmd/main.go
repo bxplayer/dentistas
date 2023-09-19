@@ -3,11 +3,15 @@ package main
 import (
 	"dentistas/cmd/server/external/database"
 	"dentistas/cmd/server/external/database/turnoRepository"
-	dentist2 "dentistas/cmd/server/handler/dentist"
+	"dentistas/cmd/server/external/database/patientRepository"
+	"dentistas/cmd/server/handler/patient"
 	"dentistas/cmd/server/handler/turnoHandler"
+	patientRoutes "dentistas/cmd/server/routes/patient"
+	dentist2 "dentistas/cmd/server/handler/dentist"
 	"dentistas/cmd/server/routes"
 	"dentistas/docs"
 	"dentistas/internal/dentist"
+	"dentistas/internal/patient"
 	"dentistas/internal/turno"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
@@ -56,6 +60,13 @@ func main() {
 
 	routes.SetupDentistRouter(router, dentistHandlerPo)
 
+	// Configuracion de Paciente
+
+	patientDatabase := patientRepository.NewDatabase(mysqlDatabase)
+	patientService := patient.NewService(patientDatabase)
+	patientHandlerPo := patientHandler.NewPatientHandler(patientService, patientService, patientService, patientService)
+	patientRoutes.SetupPatientRouter(router, patientHandlerPo)
+	
 	// Configuracion de Turno
 	turnoDatabase := turnoRepository.NewDatabase(mysqlDatabase)
 	turnoService := turno.NewService(turnoDatabase)
