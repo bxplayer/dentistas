@@ -4,11 +4,11 @@ import (
 	"dentistas/cmd/server/external/database"
 	"dentistas/cmd/server/external/database/turnoRepository"
 	"dentistas/cmd/server/external/database/patientRepository"
-	"dentistas/cmd/server/handler/dentist/handler"
 	"dentistas/cmd/server/handler/patient"
 	"dentistas/cmd/server/handler/turnoHandler"
-	dentistRoutes "dentistas/cmd/server/routes/dentist"
 	patientRoutes "dentistas/cmd/server/routes/patient"
+	dentist2 "dentistas/cmd/server/handler/dentist"
+	"dentistas/cmd/server/routes"
 	"dentistas/docs"
 	"dentistas/internal/dentist"
 	"dentistas/internal/patient"
@@ -51,14 +51,14 @@ func main() {
 	docs.SwaggerInfo.Host = os.Getenv("HOST")
 	router.GET("/docs/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
-	// Configuracion de DentistaId
+	// Configuracion de Dentista
 	myDatabase := database.NewDatabase(mysqlDatabase)
 
 	dentistService := dentist.NewService(myDatabase)
 
-	dentistHandlerPo := handler.NewDentistHandler(dentistService, dentistService, dentistService, dentistService)
+	dentistHandlerPo := dentist2.NewDentistHandler(dentistService, dentistService, dentistService, dentistService)
 
-	dentistRoutes.SetupDentistRouter(router, dentistHandlerPo)
+	routes.SetupDentistRouter(router, dentistHandlerPo)
 
 	// Configuracion de Paciente
 
@@ -71,17 +71,16 @@ func main() {
 	turnoDatabase := turnoRepository.NewDatabase(mysqlDatabase)
 	turnoService := turno.NewService(turnoDatabase)
 	turnoHandlerPro := turnoHandler.NewTurnoHandler(turnoService, turnoService, turnoService, turnoService)
-	turnoGroup := router.Group("/turno")
-	turnoGroup.GET("/:id", turnoHandlerPro.GetTurnoByID)
-	turnoGroup.GET("/", turnoHandlerPro.GetByPacienteDNI)
-	turnoGroup.POST("/", turnoHandlerPro.AddTurno)
-	turnoGroup.PUT("/:id", turnoHandlerPro.Update)
-	turnoGroup.DELETE("/:id", turnoHandlerPro.DeleteByID)
-	turnoGroup.PATCH("/:id", turnoHandlerPro.SomeUpdate)
+	routes.SetupTurnRouter(router, turnoHandlerPro)
 
 	err = router.Run()
-
 	if err != nil {
 		panic(err)
 	}
+
+	err = mysqlDatabase.Close()
+	if err != nil {
+		return
+	}
+
 }

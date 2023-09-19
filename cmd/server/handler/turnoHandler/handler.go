@@ -58,6 +58,7 @@ func (t *TurnoHandler) GetTurnoByID(ctx *gin.Context) {
 // @Accept  json
 // @Produce  json
 // @Param turno body turno.Turno true "Turno"
+// @Param TOKEN header string false "Token"
 // @Success 201 {object} turno.Turno
 // @Router /turno [post]
 func (t *TurnoHandler) AddTurno(ctx *gin.Context) {
@@ -82,6 +83,7 @@ func (t *TurnoHandler) AddTurno(ctx *gin.Context) {
 // @Produce  json
 // @Param id path string true "ID"
 // @Param turno body turno.Turno true "Turno"
+// @Param TOKEN header string false "Token"
 // @Success 200 {object} turno.Turno
 // @Router /turno/{id} [put]
 func (t *TurnoHandler) Update(ctx *gin.Context) {
@@ -111,6 +113,7 @@ func (t *TurnoHandler) Update(ctx *gin.Context) {
 // @Tags turnos
 // @Produce  json
 // @Param id path string true "ID"
+// @Param TOKEN header string false "Token"
 // @Success 200 {string} string "turno deleted"
 // @Router /turno/{id} [delete]
 func (t *TurnoHandler) DeleteByID(ctx *gin.Context) {
@@ -153,6 +156,7 @@ func (t *TurnoHandler) GetByPacienteDNI(ctx *gin.Context) {
 // @Accept  json
 // @Produce  json
 // @Param id path string true "ID"
+// @Param TOKEN header string false "Token"
 // @Param turno body turno.Turno true "Turno"
 // @Success 200 {object} turno.Turno
 // @Router /turno/{id} [patch]

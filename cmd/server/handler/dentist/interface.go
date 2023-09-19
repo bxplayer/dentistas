@@ -1,4 +1,4 @@
-package handler
+package dentist
 
 import "dentistas/internal/dentist"
 
